@@ -1,0 +1,19 @@
+repos:
+  - repo: https://github.com/prettier/prettier
+    rev: 1.15.3
+    hooks:
+      - id: prettier
+        files: \.(css|ts|tsx|json|js|jsx|md|yml|yaml)$
+
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v2.1.0
+    hooks:
+      - id: check-added-large-files
+      - id: check-json
+      - id: check-merge-conflict
+      - id: check-yaml
+      - id: end-of-file-fixer
+      - id: mixed-line-ending
+        args: ["--fix=lf"]
+      - id: requirements-txt-fixer
+      - id: trailing-whitespace
