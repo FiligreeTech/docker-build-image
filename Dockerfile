@@ -1,7 +1,7 @@
-FROM ubuntu:bionic-20200112
+FROM ubuntu:bionic-20200921
 
 LABEL maintainer="crew@filigree.tech"
-LABEL version="0.6.1"
+LABEL version="0.8.0"
 
 ARG TINI_VERSION=v0.18.0
 ARG GOSU_VERSION=1.11
@@ -105,5 +105,4 @@ RUN useradd -pNP -m -u 1000 builder && \
     echo "builder ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
 
 
-ENTRYPOINT ["/tini", "--", "gosu", "builder"]
 CMD ["/bin/bash"]
