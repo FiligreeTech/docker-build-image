@@ -1,7 +1,7 @@
 FROM ubuntu:bionic-20200921
 
 LABEL maintainer="crew@filigree.tech"
-LABEL version="0.8.0"
+LABEL version="0.8.1"
 
 ARG TINI_VERSION=v0.18.0
 ARG GOSU_VERSION=1.11
@@ -46,6 +46,7 @@ RUN apt-get -qq update && \
         python3.7-dev \
         python3.7-venv \
         sudo \
+        libgbm1 \
         yarn
 
 # Chrome dependencies. See: https://github.com/GoogleChrome/puppeteer/blob/master/.ci/node8/Dockerfile.linux
