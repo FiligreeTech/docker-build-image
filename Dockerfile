@@ -1,7 +1,7 @@
 FROM ubuntu:bionic-20200921
 
 LABEL maintainer="crew@filigree.tech"
-LABEL version="0.8.3"
+LABEL version="0.8.4"
 
 ARG TINI_VERSION=v0.18.0
 ARG GOSU_VERSION=1.11
@@ -97,6 +97,14 @@ RUN apt-get -qq update && \
         wget \
         xdg-utils \
         xvfb
+
+# google chrome - for cypress
+RUN curl -fsSL https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add -  && \
+   echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/chrome.list
+
+RUN apt-get -qq update && \
+    DEBIAN_FRONTEND=noninteractive apt-get install --no-install-recommends -y \
+        google-chrome-stable
 
 # Replace standard gzip with pigz, a drop-in multithreaded replacement.
 RUN update-alternatives --install /usr/bin/gzip gzip /usr/bin/pigz 1
