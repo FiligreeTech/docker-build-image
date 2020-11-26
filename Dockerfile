@@ -1,7 +1,7 @@
 FROM ubuntu:bionic-20200921
 
 LABEL maintainer="crew@filigree.tech"
-LABEL version="0.8.1"
+LABEL version="0.8.3"
 
 ARG TINI_VERSION=v0.18.0
 ARG GOSU_VERSION=1.11
@@ -21,6 +21,10 @@ RUN curl -fsSL https://deb.nodesource.com/setup_12.x | bash -
 RUN curl -fsSL https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - && \
     echo "deb https://dl.yarnpkg.com/debian/ stable main" > /etc/apt/sources.list.d/yarn.list
 
+# docker
+RUN curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add - && \
+       echo "deb https://download.docker.com/linux/ubuntu bionic stable" > /etc/apt/sources.list.d/docker.list
+
 # Gosu
 RUN curl -fsSL "https://github.com/tianon/gosu/releases/download/${GOSU_VERSION}/gosu-amd64" > /usr/local/bin/gosu && \
     chmod +x /usr/local/bin/gosu
@@ -29,13 +33,14 @@ RUN curl -fsSL "https://github.com/tianon/gosu/releases/download/${GOSU_VERSION}
 RUN curl -fsSL "https://github.com/krallin/tini/releases/download/${TINI_VERSION}/tini" > /tini && \
     chmod +x /tini
 
+
 # Build/test dependencies
 RUN apt-get -qq update && \
     DEBIAN_FRONTEND=noninteractive apt-get install --no-install-recommends -y \
         build-essential \
         ccache \
         clang \
-        docker \
+        docker-ce-cli \
         git \
         libc++-dev \
         libc++abi-dev \
