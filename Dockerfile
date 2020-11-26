@@ -35,6 +35,7 @@ RUN apt-get -qq update && \
         build-essential \
         ccache \
         clang \
+        docker \
         git \
         libc++-dev \
         libc++abi-dev \
